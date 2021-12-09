@@ -1,0 +1,106 @@
+---
+title: 【随时记录】Linux命令
+published: 2021-6-24
+sidebar: auto
+---
+
+# 【随时记录】Linux命令
+
+笔者之前学习linux时候，学得七窍生烟。现在七窍通了六窍，一窍不通。
+linux命令看了又忘，每次都令人抓狂，因此决定在此记录一些最常用的命令，和一些最基本的概念。
+
+linux的目录层次可参考：
+https://www.cnblogs.com/silence-hust/p/4319415.html
+
+`ls`列出当前文件夹中的所有文件名称
+`cd [folder_name]`进入某个文件夹
+`cd ..`回到上一级目录
+
+这里我就一直有一个问题搞不懂：
+进入linux系统的时候，我的目录是：
+![](https://cdn.jsdelivr.net/gh/beyondguo/mdnice_pictures/2021-6-25/1624615810953-image.png)
+
+我一直以为这是根目录，但是后来在反复的`cd ..`后，发现自己进入了这个目录：
+
+![](https://cdn.jsdelivr.net/gh/beyondguo/mdnice_pictures/2021-6-25/1624615818372-image.png)
+
+一下子把我搞懵了。
+后来查了查，才发现，`～`是我们用户的目录，一个系统可能会有多个用户，当前用户的目录就是`～`。而系统根目录是`/`。
+
+要回到用户的目录，只需要输入`cd ～`即可；
+要访问根目录，也是只需要输入`cd /`即可。
+
+**Linux系统上传文件到linux服务器，不能通过rz命令，因为需要端支持，如Xshell**
+此时，应该使用`scp`命令：
+例如：
+```
+scp -r /media/x1c/文档/Jupyter/--NLP/big_things/w2v/GoogleNews-vectors-negative300.bin root@202.121.138.168:/root/Documents/gby2019/wvmodels
+```
+即：
+`scp -r 本地文件地址 username@hostname:服务器目标地址`
+
+这个命令还可以上传**文件夹**！
+
+如果反过来，想把服务器上的文件传到本地，则把服务器地址和本地地址颠倒过来即可：
+`scp -r username@hostname:服务器文件地址 本地目标地址`
+
+**确认有可用CUDA的gpu：**
+`lspci | grep -i nvidia`
+
+![](https://cdn.jsdelivr.net/gh/beyondguo/mdnice_pictures/2021-6-25/1624615831415-image.png)
+
+
+**查看系统信息:**
+`uname -m && cat /etc/*release`
+
+
+**修改文件、目录权限**
+`sudo chmod -R 777 /home/gby/Documents`
+777代表权限模式，不用具体管，反正777就是最大的权限了。
+
+
+#### 查看磁盘占用
+`df  -h`
+`du -h`
+https://www.runoob.com/w3cnote/linux-view-disk-space.html
+
+
+## Vim
+https://www.runoob.com/linux/linux-vim.html
+#### vim的粘贴模式
+`:set paste`
+https://blog.csdn.net/wzy_1988/article/details/50264285?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+
+#### vim全选，全复制，全删除
+`ggvGd`
+https://blog.csdn.net/ztf312/article/details/83025297
+
+
+#### 让程序后台运行，不随中断终端
+`nohup 命令 &`
+
+#### 查看后台运行的所有程序
+`ps x`
+通过`grep`则可以进一步搜索具体的进程，xxx就写想查的进程中包含的字符
+`ps -aux | grep xxx`
+
+#### 查看cpu实时使用情况
+`top`
+
+#### tail命令
+`tail` 命令可用于查看文件的内容，有一个常用的参数` -f `常用于查阅正在改变的日志文件。
+
+`tail -f filename` 会把 filename 文件里的最尾部的内容显示在屏幕上，并且不断刷新，只要 filename 更新就可以看到最新的文件内容。
+这个时候，对应目录会生成一个`nohup.out`的文件，可以在里面看到后台程序运行时的一些日志。
+
+
+#### 打包文件夹
+zip -r 打包后的名字 要打包的文件/文件夹
+
+#### 生成项目的python依赖
+pip install pipreqs
+使用的时候也很简单，进入项目的根目录
+pipreqs ./
+
+#### 可以显示进度的文件传输
+`rsync --progress 文件路径 ~/`
