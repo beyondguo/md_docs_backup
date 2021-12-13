@@ -60,7 +60,13 @@ sidebar: auto
 ### Take Away
 
 1. 超参数也是可以学习的，这正是AutoML领域研究的重点。在网上看到一个写的不错的博客：https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f
-2. 
+2. 衡量一个语料的多样性（diversity），可以使用distinct-1、distinct-2等指标。这个指标最初在论文 *A Diversity-Promoting Objective Function for Neural Conversation Models* 中提出。
+
+
+
+---
+
+
 
 
 
