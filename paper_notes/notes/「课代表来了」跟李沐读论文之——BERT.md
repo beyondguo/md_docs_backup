@@ -131,3 +131,20 @@ BERT主要就是为了解决这种单向的限制，设计了一种"mask languag
 
 ## BERT的微调
 
+对于sequence-level的任务，我们可以直接使用CLS的向量作为sequence的表示，然后后面加一个简单的softmax层来进行训练；对于span-level或者token-level的任务，也只用稍微修改一下跟任务相关的输出层即可。
+
+另外，微调跟预训练时的差别还在BERT模型训练的一些超参数上，比如learning rate，batch size等等。例如在pre-training阶段batch size=256，而在fine-tuning阶段作者推荐使用16或者32.
+
+
+
+## 具体如何针对下游任务进行微调
+
+### GLUE 
+
+GLUE数据集一般都是sequence-level的任务，主要都是分类，既有单句子的，也有句子对的任务。这种就是直接用CLS配合一个softmax来跑即可。
+
+![GLUE](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20211216162841.png)
+
+### SQuAD （问答）
+
+ 
