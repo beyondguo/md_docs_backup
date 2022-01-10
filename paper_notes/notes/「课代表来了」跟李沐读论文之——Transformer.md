@@ -12,7 +12,7 @@ sidebar: auto
 
 > 李沐老师读论文的顺序一般是这样的：标题+作者 > 摘要 > 导言 > 结论 > 相关工作 > 模型设计 > 实验，最后做一个总评。我这里也是按照这个顺序进行记录的。
 
-![](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20211129211804.png)
+![](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20211219131751.png)
 
 ## 标题+作者
 
@@ -20,7 +20,9 @@ sidebar: auto
 发表：NIPS2017
 机构：Google
 
-> Comments by Li Mu: 8个作者都是共同贡献，这在计算机论文中很少见
+![image-20211219121954021](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20211219121954.png)
+
+> Comments by Li Mu: 8个作者都是共同贡献，这在计算机论文中很少见。但是为了解释为什么有这么多共同一作，论文在脚注中清楚了写明了每个人在这个工作中的贡献，确实大家都担得上“共同贡献”这一说。
 
 
 ## 摘要
@@ -51,7 +53,8 @@ sidebar: auto
 
 ## Intro（导言）
 
-介绍了传统的RNN，CNN以及encoder-decoder架构。分析了RNN的缺点：1. 难以并行 2. 容易遗忘。再介绍了attention机制。最后
+介绍了传统的RNN，CNN以及encoder-decoder架构。分析了RNN的缺点：1. 难以并行 2. 容易遗忘。再介绍了attention机制。最后提出了一个全新的架构Transformer。
+
 > Comments by Li Mu:  这个intro很短，主要是内容比较多，而NIPS的篇幅较短。
 
 ## Background（相关工作）
