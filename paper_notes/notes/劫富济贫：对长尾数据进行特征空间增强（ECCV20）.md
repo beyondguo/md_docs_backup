@@ -6,7 +6,7 @@ sidebar: auto
 
 ---
 
-# 特征空间增强|劫富济贫：对长尾数据进行特征空间增强（ECCV20）
+# 劫富济贫：对长尾数据进行特征空间增强（ECCV20）
 
 ![](https://cdn.jsdelivr.net/gh/beyondguo/mdnice_pictures/typora/image-20220113184208559.png)
 
