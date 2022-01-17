@@ -6,6 +6,9 @@ sidebar: auto
 
 # 郭必扬
 
+- <small>Tel: 185-7275-6723</small>
+- <small>E-Mail: guo_biyang(@)163(dot)com</small>
+
 > 目前是**上海财经大学信息管理与工程学院人工智能实验室**（SUFE AI Lab）在读二年级博士生。本科硕士均就读于上海财经大学信息管理与工程学院。
 
 
@@ -22,7 +25,7 @@ sidebar: auto
 
 
 
-## 科研成果：
+## 已有科研工作：
 
 <style>
 table th:first-of-type {
