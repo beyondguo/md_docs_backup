@@ -64,12 +64,7 @@ AutoML, Bayesian Optimization (BO), Sequential Model Based Optimisation (SMBO), 
 上面是grid search和random search的示意图。简单地讲，random search在相同的超参数组合次数中，探索了更多的空间（这句话也有歧义，更准确得说应该是**每个维度的参数，都尝试了更多的可能**），因此从平均意义上看可以比grid search更早得找到较好的区域。
 
 <style>
-table th:first-of-type {
-    width: 50%;
-}
-table th:nth-of-type(2) {
-    width: 50%;
-}
+
 </style>
 
 
