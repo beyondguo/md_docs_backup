@@ -57,29 +57,72 @@ QA可以分为Close-domain QA和Open-domain QA [1]，前者一般限制在某个
 
 对于文本的检索，目前最常用的方案就是基于倒排索引（inverted index）的关键词检索方式，例如最常用的ElasticSearch方案，就是基于倒排索引的，简言之，这是一种关键词搜索，具体的匹配排序规则有TF-IDF和BM25两种方式。这种文本检索的方式，是一种文本的bag-of-words表示，通过词频、逆文档频率等统计指标来计算question和document之间的相关性，可参考BM25的wiki[2]。
 
+![](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/image-20220216200646975.png)
+
 这种方式，是比较“硬”的匹配，当你搜索的关键词准确、明确时，搜索结果会非常好，但是当你只知道大概意思，搜索的结果可能就很差，因为bag-of-words的表示，无法认识到词语之间的相似性关系，因此就只能搜索到你输入的关键词，却无法找到词语不同但意思相近的结果。
 
 一般的Open-domain QA都会直接使用这种基于TF-IDF或者BM25的匹配方式来进行检索，本论文则是提出，我们可以使用语义的匹配来达到更好的效果，弥补硬匹配的不足，这也是本论文的主要关注点。具体地，我们可以训练一个语义表示模型，赋予文本一个dense encoding，然后通过向量相似度来对文档进行排序。
 
+其实向量搜索也很常见了，像以图搜图就是典型的向量相似度搜索，常用的开源引擎有Facebook家的FAISS.
 
 
 
 
 
+### 阅读理解
+
+阅读理解一般指的是，给定一个问题（question）和一段话（passage），要求从这段话中找出问题的答案。训练方式一般是我们计算passage中每个token是question的开头s或者结尾t的概率，然后计算正确答案对应start/end token最大似然损失之和。具体咱们可以参考BERT论文中对fine-tuning QA模型中的方法介绍：
+
+![源自BERT论文](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/image-20220216193432332.png)
+
+即，通过BERT encoder，我们可以得到每个token的一个representation，然后我们再额外设置一个start vector和一个end vector，与每个token的representation计算内积，再通过softmax归一化，就得到了每个token是start或者end的概率。
+
+我在一个博客上看到了一个画的更清楚的图：
+
+![https://mccormickml.com/2020/03/10/question-answering-with-a-fine-tuned-BERT/#part-1-how-bert-is-applied-to-question-answering](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/image-20220216200401533.png)
+
+关于阅读理解的具体内容，这里也不赘述，这也不是今天这篇论文的重点。
 
 
 
 ## Dense Passage Retriever (DPR)
 
+本文最重要的就是这个DPR了，它解决的就是open-domain QA中的检索问题，目标是训练一个文本表示模型，可以对question和passage进行很好的语义向量表示，从而实现高精度的向量搜索。
+
+DPR是一个retriever，实际上分两块，首先我们需要得到文档的向量表示，然后我们需要一个向量搜索工具，后者本文中直接使用著名的FAISS向量搜索引擎，所以重点就是训练一个文本表示模型。
+
+### Dual-encoder
+
+本文使用了一个dual-encoder的框架，可以理解为一个双塔结构，一个encoder $E_P(\cdot)$专门对passage进行表示，另一个encoder $E_Q(\cdot)$专门对question进行表示，然后我们使用内积来表示二者的相似度：
+$$
+sim(p,q) =E_P(p)\cdot E_Q(q)
+$$
 
 
-模型结构
+### 损失函数设计
 
-损失函数设计
+我们首先构造训练样本，它是这样的形式：
+$$
+D = \{<q_i, p_i^+, p_{i,1}^-, ..., p_{i,n}^->\}_i
+$$
+即，**每个训练样本，都是由1个question，1个positive passage和n个negative passage构成的**。positive就是与问题相关的文本，negative就是无关的文本。
 
-负样本选择
+用一个样本中每个passage（n+1个）和当前question的相似度作为logits，使用softmax对logits进行归一化，就可以得到每个passage与当前question匹配的概率，由此就可以设计极大似然损失——取positive passage的概率的负对数：
+$$
+L(q, p^+, p_{1}^-, ..., p_{n}^-)\\
+=-log\frac{exp(sim(q, p^+))}{exp(sim(q, p^+))+\sum_{j=1}^{n} exp(sim(q, p_{j}^-))}
+$$
+上面的公式里，为方便看清楚，我省去了样本的下标$i$。可以看到，这就相当于一个cross-entropy loss。而这样的设计，跟现在遍地的对比学习的loss非常像，例如知名的SimCSE也引用了本文：
 
-关键的Trick——In-batch negatives
+<img src="https://gitee.com/beyond_guo/typora_pics/raw/master/typora/image-20220216211321915.png" alt="image-20220216211321915" style="zoom:80%;" />
+
+
+
+### 负样本选择
+
+
+
+### 关键的Trick——In-batch negatives
 
 
 
