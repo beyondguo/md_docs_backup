@@ -22,7 +22,7 @@ sidebar: auto
 
 ## Open-domain question answering (QA)
 
-QA可以分为Close-domain QA和Open-domain QA [1]，前者一般限制在某个特定领域，有一个给定的该领域的知识库，比如医院里的问答机器人，只负责回答医疗相关问题，甚至只负责回答该医院的一些说明性问题，再比如我们在淘宝上的智能客服，甚至只能在它给定的一个问题集合里面问问题；而Open-domain QA则是我们可以问任何事实性问题，一般是给你一个海量文本的语料库，比方Wikipedia/百度百科，让你从这个里面去找回答任意非主观问题的答案，这显然就困难地多。总结一下，Open-domain QA的定义：
+QA可以分为Close-domain QA和Open-domain QA，前者一般限制在某个特定领域，有一个给定的该领域的知识库，比如医院里的问答机器人，只负责回答医疗相关问题，甚至只负责回答该医院的一些说明性问题，再比如我们在淘宝上的智能客服，甚至只能在它给定的一个问题集合里面问问题；而Open-domain QA则是我们可以问任何事实性问题，一般是给你一个海量文本的语料库，比方Wikipedia/百度百科，让你从这个里面去找回答任意非主观问题的答案，这显然就困难地多。总结一下，Open-domain QA的定义：
 
 > Open-domain QA，是这样一种任务：给定海量文档，来回答一个事实性问题（factoid questions ）。
 
@@ -55,7 +55,7 @@ QA可以分为Close-domain QA和Open-domain QA [1]，前者一般限制在某个
 
 ### 文本检索
 
-对于文本的检索，目前最常用的方案就是基于倒排索引（inverted index）的关键词检索方式，例如最常用的ElasticSearch方案，就是基于倒排索引的，简言之，这是一种关键词搜索，具体的匹配排序规则有TF-IDF和BM25两种方式。这种文本检索的方式，是一种文本的bag-of-words表示，通过词频、逆文档频率等统计指标来计算question和document之间的相关性，可参考BM25的wiki[2]。
+对于文本的检索，目前最常用的方案就是基于倒排索引（inverted index）的关键词检索方式，例如最常用的ElasticSearch方案，就是基于倒排索引的，简言之，这是一种关键词搜索，具体的匹配排序规则有TF-IDF和BM25两种方式。这种文本检索的方式，是一种文本的bag-of-words表示，通过词频、逆文档频率等统计指标来计算question和document之间的相关性，可参考BM25的wiki。
 
 ![](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/image-20220216200646975.png)
 
@@ -64,6 +64,8 @@ QA可以分为Close-domain QA和Open-domain QA [1]，前者一般限制在某个
 一般的Open-domain QA都会直接使用这种基于TF-IDF或者BM25的匹配方式来进行检索，本论文则是提出，我们可以使用语义的匹配来达到更好的效果，弥补硬匹配的不足，这也是本论文的主要关注点。具体地，我们可以训练一个语义表示模型，赋予文本一个dense encoding，然后通过向量相似度来对文档进行排序。
 
 其实向量搜索也很常见了，像以图搜图就是典型的向量相似度搜索，常用的开源引擎有Facebook家的FAISS.
+
+![](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220217095416.png)
 
 
 
@@ -103,7 +105,7 @@ $$
 
 我们首先构造训练样本，它是这样的形式：
 $$
-D = \{<q_i, p_i^+, p_{i,1}^-, ..., p_{i,n}^->\}_i
+D = \{ < q_i, p_i^+, p_{i,1}^-, ..., p_{i,n}^- > \}_i
 $$
 即，**每个训练样本，都是由1个question，1个positive passage和n个negative passage构成的**。positive就是与问题相关的文本，negative就是无关的文本。
 
@@ -120,18 +122,150 @@ $$
 
 ### 负样本选择
 
+在上面的损失函数中，我们发现负样本起着重要的作用。另外，正样本一般都是确定的，而负样本的选择则是多种多样的，所以负样本怎么选，对结果应该有很大的影响。
 
+作者设计了三种负样本（negative passage）选择的方式：
+
+1. **Random**：从语料库中随机抽取一个passage，基本上都是跟当前question无关的；
+2. **BM25**：使用基于BM25的文本检索方式在语料库中检索跟question最相关的文本，但要求不包含答案；
+3. **Gold**：在训练样本中，其他样本中的positive passage。即对于训练样本$i$和$j$，$q_i$对应的正样本是$p_i^+$，而这个$p_i^+$可以作为$q_j$的负样本。
+
+既然都命名为Gold了，那说明作者对它给予了厚望，肯定是主要的负样本来源。
+
+论文最终的最佳实践，就是主要采用同一个mini-batch中的Gold passages，配合上一个BM25 passage（以及同batch内其他question的BM25）。
 
 ### 关键的Trick——In-batch negatives
 
+假设我们的batch size为B，每个question有1个positive和n个negative，那么一个batch内就有$B \times (n+1)$个passages要经过encoding，而一般我们都需要比较多的negatives才能保证较好的效果，所以光是encoding，这个计算开销就很大。
+
+于是，有人就想出了一个办法，我们只需要B个questions和其对应的B个positives，形成两个矩阵$Q$和$P$，然后“我的positive，可以当做你的negative”，这样我们就不需要额外再找negative了，然后直接算一个$S=QP^T$就可以得到计算损失函数所需要的所有pair的相似度，这就使得整个过程变得高效又简洁。由于不需要额外找negatives，所以一个batch内只有$B$个positive passages需要经过encoding，这比前面的方法减少了$n+1$倍，干净又卫生啊兄弟们。
+
+上面说的方式，相当于只使用Gold负样本，实际上作者在最佳方案中还使用了BM25负样本，但也是采用的in-batch training的策略，即，我每个question都找一个BM25负样本， 然后，该BM25样本也会作为同batch内所有其他question的负样本，这相当于再增加一个矩阵$M$，总共有$B \times 2$个passages进行encoding，然后多计算一个矩阵乘法得到相似度。
+
+最后注意，in-batch training并不是DPR论文首创，前面很多工作中已经得到成功应用。
+
+## 实验设置&数据集
+
+### Knowledge Source
+
+知识库，就是我们open-domain QA使用什么语料库来进行问答。本文选用Wikipedia，这也是最常用的设定。当然，Wikipedia是一篇篇文章，通常是十分长，模型不便处理，因此这里作者将所有文本，都继续划分成100个词长度的passages，这些length=100的passages就是本文做检索的基本单元。另外，每个passage还在开头拼接上了对应Wikipedia page的title。
+
+### QA Datasets
+
+我们还需要有<问题，答案>这样的数据集，来让我们训练retriever和reader。
+
+具体数据集有：
+
+- Natural Questions (NQ) ：提供了question和answer，且答案全都来自Wikipedia
+- TriviaQA：提供question-answer-evidence triples
+- WebQuestions (WQ)：只提供了question和answer
+- CuratedTREC (TREC)：只提供了question和answer
+- SQuAD v1.1：提供question，context和answer
+
+这些数据集中，对于TriviaQA，WQ和TREC，由于没有给相关的context，没法直接那answer当做positive passages，所以作者选择在Wikipedia passages中使用BM25来检索包含answer的passage来作为positive passage（虽然这种做法我感觉不一定好，因为匹配上的，不一定就能回答你的问题，比如你问“阿里巴巴谁创办的”，答案是“马云”，但包含“马云”的句子可能是“马云在达沃斯论坛演讲”，这显然不能回答该问题）。
+
+对于SQuAD和NQ，由于这些数据集提供的passage跟作者自己的预处理方式不一样，所以作者用这些passage在前面对Wikipedia预处理后的passages pool中去匹配得到positive passage。
 
 
-## 实验设计&结果
+
+### Baselines
+
+对于retrieval任务，baseline就是BM25算法，同时作者还对比了BM25+DPR的效果，即将二者的得分进行加权平均:$BM25(q,p)+\lambda \cdot sim(q,p)$，其中作者发现$\lambda=1.1$效果较好。
+
+另外对于DPR来说，越多的训练样本肯定越好，所以除了在单个数据集上训练测试外，作者还尝试了使用所有数据集的训练样本来训练DPR然后测试。而BM25也是纯统计方法，所以不存在使用训练数据一说。
 
 
 
-参考文献：
+
+
+## Retrieval任务实验结果
+
+### Main Results：
+
+结果见下表：
+
+![retrieval任务结果](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220218191438.png)
+
+可以发现，**除了SQuAD数据集**，其他的数据集上，DPR的表现都不错，都大幅超越了BM25算法，而结不结合BM25，其实影响不是很大，但使用更多的训练数据集，总体上肯定更好些。
+
+### 在精确匹配上效果并不好：
+
+**在SQuAD上，效果很差，这一点很有意思**。关于这一点，作者给出的解释是：
+
+![image-20220218192133247](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220218192133.png)
+
+即 1.这个数据集的question跟passage再语言上高度重合，所以BM25天然有优势；2. 这个数据集采样是有偏的。
+
+其实这也告诉我们，你DPR也不是万能的，天下没有免费的午餐，在那种“精确匹配”的场景下，相似度搜索一般不会比bag-of-words硬匹配更好。
+
+### 训练好的DPR需要多少数据量：
+
+然后我们看看使用多少数据量，DPR就超过了BM25：
+
+<img src="https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220218191754.png" alt="DPR使用的训练集大小" style="zoom:85%;" />
+
+可见，仅仅使用1k的数据量，DPR这种语义匹配的方式，就超越了BM25这种硬匹配。
+
+
+
+### In-batch negatives：
+
+然后再看看negative样本的选择的影响，也看看in-batch training这种方式怎么样：
+
+![in-batch training](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220218192713.png)
+
+这个表初次读的时候一直搞不懂，文中也没写明白，后来请教了同学才搞明白：
+
+第一个block，batch size不太清楚，有可能是128，但不使用in-batch的策略，每个question都自带7个negatives参与训练。这个block是为了对比不同的negative的效果，发现其实差不多，各有优劣。
+
+第二个block，batch size分别是8，32，128，采用的in-batch策略，使用同batch内的其他positive作为negative，所以batch越大，可以使用的negatives就越多，因此效果就越好，效果比第一个block好了很多。
+
+第三个block，batch size分别是32，32，128，除了Gold，每个样本还带了1-2个BM25样本，且这些样本在整个batch内共享（参考上文中“负样本选择”一节的介绍），发现，带一个BM25样本就有明显提高，再多了就没效果了。
+
+总之，这个实验说明，in-batch training是很高效、有效的一种方法，然后负样本我们可以主要使用batch内的那些positives（即Gold passages），再配上一个额外的BM25 passage即可取得很好的效果。
+
+
+
+### Similarity和loss的选择
+
+本文采用的是dot product作为相似度度量，作者还测试了L2距离和cosine similarity，发现最差的是cosine similarity。（这一点有意思，可探究一下为什么）
+
+关于loss，除了本文的NLL loss，作者还尝试了在similarity任务中常用的triplet loss，发现效果差别不大，但还是NLL loss更好一点。
+
+### Cross-dataset generalization
+
+这里文中也是一笔带过，所以我也不赘述，我只是很高兴在论文中看到了这样的实验，cross-dataset generalization是大多数人不会去考虑的一个实验，但对于验证泛化性能是很重要的。
+
+
+
+## End-to-End QA实验结果
+
+这部分并不是本文的重点，前面讲了，除了训练一个retriever（对应本文的DPR），完成open-domain QA还需要一个reader。之前的sota工作都涉及到复杂的预训练，但是本文重点在于搞一个很好的retriever——DPR，从而只需要简单训练一个reader就够了，下面是实验结果：
+
+![QA实验](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220218195546.png)
+
+最后再贴一段作者自己的评论：
+
+![image-20220218195645629](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220218195645.png)
+
+
+
+## 总结
+
+这篇文章最大的亮点在于在训练学习text representation的时候如何选择negative samples，其中的Gold和BM25对学习一个好的表示起到了重要的作用，因此仅仅使用1k个训练样本，就可以训练一个超越BM25算法的文本检索工具。本文也为后续的一些对比学习工作，例如SimCSE等产生了启发，作为文本相似度匹配的重要工作，本文还是很值得一读的。
+
+以上，这篇文章就解读完毕了，其实我之前怎么了解过QA，而本文对于QA小白来说也是一个绝佳的教材，所以这篇文章除了让我了解DPR这个工作之外，也让我学习了很多关于QA的相关知识，收获颇丰。
+
+
+
+推荐资料：
 
 [1]Wikipedia: Question Answering https://en.wikipedia.org/wiki/Question_answering
 [2]Wikipedia: BM25 https://en.wikipedia.org/wiki/Okapi_BM25
+[3] DrQA: Reading Wikipedia to Answer Open-Domain Questions
+[4] Efficient Natural Language Response Suggestionfor Smart Reply
+
+
+
+
 
