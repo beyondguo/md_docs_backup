@@ -9,6 +9,10 @@ sidebar: auto
 笔者之前学习linux时候，学得七窍生烟。现在七窍通了六窍，一窍不通。
 linux命令看了又忘，每次都令人抓狂，因此决定在此记录一些最常用的命令，和一些最基本的概念。
 
+
+
+### 目录与层级
+
 linux的目录层次可参考：
 https://www.cnblogs.com/silence-hust/p/4319415.html
 
@@ -59,13 +63,13 @@ scp -r /media/x1c/文档/Jupyter/--NLP/big_things/w2v/GoogleNews-vectors-negativ
 777代表权限模式，不用具体管，反正777就是最大的权限了。
 
 
-#### 查看磁盘占用
+### 查看磁盘占用
 `df  -h`
 `du -h`
 https://www.runoob.com/w3cnote/linux-view-disk-space.html
 
 
-## Vim
+### Vim
 https://www.runoob.com/linux/linux-vim.html
 #### vim的粘贴模式
 `:set paste`
@@ -76,31 +80,64 @@ https://blog.csdn.net/wzy_1988/article/details/50264285?depth_1-utm_source=distr
 https://blog.csdn.net/ztf312/article/details/83025297
 
 
-#### 让程序后台运行，不随中断终端
+### 让程序后台运行，不随中断终端
 `nohup 命令 &`
 
-#### 查看后台运行的所有程序
+### 查看后台运行的所有程序
 `ps x`
 通过`grep`则可以进一步搜索具体的进程，xxx就写想查的进程中包含的字符
 `ps -aux | grep xxx`
 
-#### 查看cpu实时使用情况
+### 查看cpu实时使用情况
 `top`
 
-#### tail命令
+### tail命令
 `tail` 命令可用于查看文件的内容，有一个常用的参数` -f `常用于查阅正在改变的日志文件。
 
 `tail -f filename` 会把 filename 文件里的最尾部的内容显示在屏幕上，并且不断刷新，只要 filename 更新就可以看到最新的文件内容。
 这个时候，对应目录会生成一个`nohup.out`的文件，可以在里面看到后台程序运行时的一些日志。
 
 
-#### 打包文件夹
+### 打包文件夹
 zip -r 打包后的名字 要打包的文件/文件夹
 
-#### 生成项目的python依赖
+### 生成项目的python依赖
 pip install pipreqs
 使用的时候也很简单，进入项目的根目录
 pipreqs ./
 
-#### 可以显示进度的文件传输
+### 可以显示进度的文件传输
 `rsync --progress 文件路径 ~/`
+
+
+
+### Screen命令
+
+通过`apt-get update` 和`apt-get install screen`安装
+
+创建新screen：`screen -S screen_name`
+
+查看所有的screen：`screen -ls`
+
+退出当前screen（程序继续运行）：按Ctrl+a+d三个键
+
+重新进入某个screen：`screen -r screen_name/screen_id`
+
+更多的一些例子参见：https://www.cnblogs.com/mchina/archive/2013/01/30/2880680.html
+
+
+
+### ps 和 kill
+
+查看后台程序 `ps -x`
+
+后面还可以加一些筛选，比如查询后台所有包含 "beyond"的程序：
+
+`ps -x | grep beyond`
+
+kill命令，除了直接`kill [PID]`之外，还可以按照名字来kill一大批：
+
+`pkill -f *beyond*` 就会把所有名字里包含beyond的程序都关掉。
+
+
+

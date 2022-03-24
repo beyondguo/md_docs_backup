@@ -134,3 +134,14 @@ ssh key的生成：
 
 同一个pub key，只能放在一个账号里，所以同一个设备如果pub key希望对应多个账号，就需要多生成pub key。
 
+## Git lfs大文件
+
+先得作如下的准备，才能进行lfs下载：
+
+```
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+
+sudo apt-get install git-lfs
+```
+
+
