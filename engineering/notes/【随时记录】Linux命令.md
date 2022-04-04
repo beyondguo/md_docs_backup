@@ -115,6 +115,13 @@ pipreqs ./
 
 通过`apt-get update` 和`apt-get install screen`安装
 
+```
+sudo apt-get update
+sudo apt-get install screen
+```
+
+
+
 创建新screen：`screen -S screen_name`
 
 查看所有的screen：`screen -ls`
