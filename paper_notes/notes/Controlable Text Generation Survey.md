@@ -5,7 +5,7 @@ sidebar: auto
 
 ---
 
-# 盘点Controlable Text Generation(CTG)的进展
+# 盘点Controllable Text Generation(CTG)的进展
 
 ![image-20220404143858765](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/202204041438988.png)
 
@@ -28,7 +28,7 @@ Controlable Text Generation，可控制的文本生成，就是能够在传统�
 
 ![CTG examples](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/202204041454581.png)
 
-<img src="https://gitee.com/beyond_guo/typora_pics/raw/master/typora/202204041454581.png" alt="CTG examples html img">
+
 
 第一个例子就是给定一个故事线，要求模型按照这样的思路去生成。第二个例子是关于传统人机对话中如果机器生成文本时不受控制可能带来的问题，比如会给出有害的建议，甚至说脏话，这个时候就需要我们在模型生成的时候加以控制。
 
@@ -201,18 +201,18 @@ PPLM不希望去训练PLM，而是通过额外的一个attribute model来对PLM�
 
 
 
-## -Referrences:
+## -References:
 
 [1] Exploring Controllable Text Generation Techniques (2020) \
 [2] Technical report: Auxiliary tuning and its application to conditional text generation (2020) \
-[3] DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation (2020) \
-[4] The Power of Scale for Parameter-Efficient Prompt Tuning (2021) \
-[5] Controllable Generation from Pre-trained Language Models via Inverse Prompting (2021) \
+[3] DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation (ACL-20) \
+[4] The Power of Scale for Parameter-Efficient Prompt Tuning (EMNLP-21) \
+[5] Controllable Generation from Pre-trained Language Models via Inverse Prompting (KDD-21) \
 [6] CTRL: A Conditional Transformer Language Model for Controllable Generation (2019) \
-[7] POINTER: Constrained Text Generation via Insertion-based Generative Pre-training (2020) \
+[7] POINTER: Constrained Text Generation via Insertion-based Generative Pre-training (EMNLP-20) \
 [8] Insertion Transformer: Flexible Sequence Generation via Insertion Operations (2019) \
 [9] Parallel Refinements for Lexically Constrained Text Generation with BART (EMNLP-21) \
-[10] CoCon: A Self-Supervised Approach for Controlled Text Generation (2021) \
+[10] CoCon: A Self-Supervised Approach for Controlled Text Generation (ICLR-21) \
 [11] Plug and Play Language Models: A Simple Approach to Controlled Text Generation (ICLR-20) \
 [12] Ranked Keywords to Story Generation (2021, Stanford Student Project) \
 [13] MEGATRON-CNTRL: Controllable Story Generation with External Knowledge Using Large-Scale Language Models (EMNLP-20) \
