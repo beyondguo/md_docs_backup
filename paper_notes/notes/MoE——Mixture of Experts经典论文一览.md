@@ -207,7 +207,7 @@ GLaM使用的数据量也比Switch-Transformer等要大得多：
 
 上面的三篇文章（GShard，Switch-Transformer，GLaM）都是希望通过MoE的方式把模型做得尽可能的大，大到普通人玩不起（动辄使用几百个experts），下面介绍的两篇文章，则更加亲民一点，是关于如何利用MoE去压缩模型、提高效率：
 
-### 6. Go Wider Instead of Deeper, AAAI'22
+## 6. Go Wider Instead of Deeper, AAAI'22
 
 - 期刊/会议：AAAI'22
 - 论文链接：https://readpaper.com/paper/3184020733
