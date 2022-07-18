@@ -8,6 +8,8 @@ sidebar: auto
 
 最近接触到 **Mixture-of-Experts (MoE)** 这个概念，才发现这是一个已经有30多年历史、至今依然在被广泛应用的技术，所以读了相关的几篇经典论文，在这里总结一下。
 
+## 开创工作
+
 ### 1. Adaptive mixtures of local experts, Neural Computation'1991
 
 - 期刊/会议：Neural Computation (1991)
@@ -131,6 +133,8 @@ $$
 
 上面的两篇，是MoE系列工作的基础，接下来介绍的工作，都是近几年的比较出名的工作，我们简单过一下：
 
+## 使用 MoE 开发超大模型
+
 ### 3. GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding, ICLR'21
 
 - 期刊/会议：ICLR'21
@@ -207,7 +211,9 @@ GLaM使用的数据量也比Switch-Transformer等要大得多：
 
 上面的三篇文章（GShard，Switch-Transformer，GLaM）都是希望通过MoE的方式把模型做得尽可能的大，大到普通人玩不起（动辄使用几百个experts），下面介绍的两篇文章，则更加亲民一点，是关于如何利用MoE去压缩模型、提高效率：
 
-## 6. Go Wider Instead of Deeper, AAAI'22
+## 使用 MoE 来使模型轻量化
+
+### 6. Go Wider Instead of Deeper, AAAI'22
 
 - 期刊/会议：AAAI'22
 - 论文链接：https://readpaper.com/paper/3184020733
