@@ -87,3 +87,106 @@ d
 >>>defaultdict(list, {'a': [1]})
 ```
 
+
+
+## Pandas系列
+
+关于dataframe的各种操作，官方文档：https://pandas.pydata.org/docs/reference/frame.html#
+
+### rename columns
+
+```python
+>>> df = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6]})
+>>> df.rename(columns={"A": "a", "B": "c"})
+   a  c
+0  1  4
+1  2  5
+2  3  6
+```
+
+
+
+### remove/drop columns
+
+```python
+>>> df.drop(columns=['B', 'C'])
+   A   D
+0  0   3
+1  4   7
+2  8  11
+```
+
+### 统计某column各值的数量
+
+`df.your_column.value_counts()`
+
+
+
+### 清理空值
+
+```python
+df = df.dropna()
+df = df[df.content != ''] 
+```
+
+
+
+### 筛选
+
+例如有一个column为content，需要过滤过content分词后长度大于10的样本：
+
+`df[df['content'].apply(lambda x: len(x.split(' '))>5)]`
+
+
+
+
+
+## `random`库
+
+- 随机取一个序号：
+  `random.randrange(stop)` or `random.randrange(start,stop)`
+
+- 随机不重复抽样（用sample）：
+  `random.sample(population, k, counts)`
+  从population中不重复地抽样k个，其中，我们可以通过跟population同等长度的counts来指定每个元素在总体中的个数。For example, `sample(['red', 'blue'], counts=[4, 2], k=5)` is equivalent to `sample(['red', 'red', 'red', 'red', 'blue', 'blue'], k=5)`.
+
+  返回一个list，哪怕只有一个。
+
+- 允许重复的采样（用choices）：
+  `random.choices(population,weights,k)`
+  返回一个list，哪怕只有一个。
+
+- 随机采样一个（用choice）：
+  ``random.choice(population)`，返回一个值。
+
+- 打乱顺序：
+  `random.shuffle(x)`
+
+  
+
+
+
+## logging
+
+https://stackoverflow.com/questions/6386698/how-to-write-to-a-file-using-the-logging-python-module
+
+https://stackoverflow.com/questions/8455171/how-to-choose-handler-while-logging-in-python
+
+https://docs.python.org/3/howto/logging.html
+
+
+
+## string字符串相关骚操作
+
+### 建立一个字符替换表，translate函数
+
+```python
+table = str.maketrans({"-":  r"\-", "]":  r"\]", "[":  r"\[", "\\": r"\\", \
+                       "^":  r"\^", "$":  r"\$", "*":  r"\*", ".":  r"\.", \
+                        "(":  r"\(", ")":  r"\)", \
+                       })
+s_new = s.translate(table)
+```
+
+就不用写一堆`replace`了。
+

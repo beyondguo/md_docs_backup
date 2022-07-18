@@ -128,6 +128,8 @@ sudo apt-get install screen
 
 退出当前screen（程序继续运行）：按Ctrl+a+d三个键
 
+关闭某个screen，进入之后，输入exit即可
+
 重新进入某个screen：`screen -r screen_name/screen_id`
 
 更多的一些例子参见：https://www.cnblogs.com/mchina/archive/2013/01/30/2880680.html
@@ -148,3 +150,116 @@ kill命令，除了直接`kill [PID]`之外，还可以按照名字来kill一大
 
 
 
+
+
+### conda environment
+
+创建环境（直接拷贝现有环境）：
+
+`conda create -n your_env_name --clone some_other_env`
+
+创建全新环境，并指定python版本：
+
+`conda create -n your_env_name python=3.8`
+
+删除某环境:
+
+`conda env remove -n your_env_name`
+
+
+
+### CUDA
+
+check cuda version:  `nvcc --version`
+
+运行程序时指定CUDA device：
+
+① 在命令行指定：
+
+`CUDA_VISIBLE_DEVICES=1 python my_script.py`
+
+② 在程序内设定：
+
+```python
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+```
+
+或者对于torch：
+
+```python
+import torch
+torch.cuda.set_device(id)
+```
+
+
+
+### 文件访问权限
+
+例如对于私钥，你要设置成只有你自己可读：
+
+Keys need to be only readable by you:
+
+```
+chmod 400 ~/.ssh/id_rsa
+```
+
+If Keys need to be read-writable by you:
+
+```
+chmod 600 ~/.ssh/id_rsa
+```
+
+
+
+
+
+### jupyter
+
+发现需要密码的话，可以通过这个命令设置自己的密码，不需要之前的密码是啥：
+
+`jupyter notebook password`
+
+
+
+## 下载Google Drive文件
+
+`pip install gdown`
+
+`gdown <file_id>`
+
+file_id的位置，一般在分享链接的这里：`https://drive.google.com/file/d/<file_id>/view?usp=sharing`
+
+
+
+## 环境变量
+
+https://www.baeldung.com/linux/path-variable
+
+To append a new path, we reassign PATH with the **new path at the end**:
+
+```bash
+export PATH=$PATH:/some/new/path
+```
+
+## 查看python位置
+
+查看所有python路径：
+
+`whereis python`
+
+查看当前用的哪个python：
+
+`which python`
+
+
+
+## 打包python环境依赖
+
+https://towardsdatascience.com/stop-using-pip-freeze-for-your-python-projects-9c37181730f9
+
+使用`pipreqs`包:
+
+`pip install pipreqs `
+
+然后直接在你的project目录下执行`**pipreqs**`即可得到requirements.txt。这个比使用`pip freeze > requirements.txt`的方式更好，详情见连接。

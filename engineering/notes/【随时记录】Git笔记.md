@@ -145,3 +145,37 @@ sudo apt-get install git-lfs
 ```
 
 
+
+---
+
+# 常见错误
+
+
+
+> error: The following untracked working tree files would be overwritten by merge:
+
+The error above is often triggered when we do not clone the repository we are trying to pull from. The projects may be identical, but we may be working on one locally while trying to pull it from the repo on Github because it may have other files or features we’d like to incorporate on our local version.
+
+https://careerkarma.com/blog/error-the-following-untracked-working-tree-files-would-be-overwritten-by-merge/
+
+> fatal: refusing to merge unrelated histories
+
+https://itsmycode.com/fatal-refusing-to-merge-unrelated-histories-solved/
+
+
+
+force overwrite local branch:
+
+https://stackoverflow.com/questions/1125968/how-do-i-force-git-pull-to-overwrite-local-files
+
+
+
+使用vscode进行commit的时候，会出现一个傻逼问题，明明写了comment，却还是显示：
+
+> Aborting commit due to empty commit message.
+
+这个时候，可以执行：`git config --global core.editor "code -w"`
+
+然后直接`git commit`
+
+这时，会弹出一个新窗口，让你写comment，写完之后，保存，关闭，vscode就会帮你进行commit

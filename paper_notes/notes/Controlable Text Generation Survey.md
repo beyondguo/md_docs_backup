@@ -11,7 +11,7 @@ sidebar: auto
 
 A Survey of Controllable Text Generation using Transformer-based Pre-trained Language Models，一篇2022年1月上传到Arxiv上的一篇综述文章，作者团队里面有**周明**和**宋大为**两个大佬。比较奇怪的是论文使用的是ACM Journal的模板，还有DOI号，但是搜索DOI却发现是另外一篇无关的文章，所以不知道这个文章到底发表在哪里、有无发表。但不管怎么，这依然是一篇很好的综述，对**可控制的文本生成**这个领域的工作做了很好的梳理和总结，值得一读。
 
-本博客主要根据这篇Survey论文进行总结，单也添加了很多论文中没有的内容，比如对Survey中列举的具体工作，进行了更加深入的说明和讨论，还有一些Survey中没有涉及到的工作，也在本博客中有讨论，同时，本文也没有涵盖Survey中列举的所有工作。
+**Notice:** 本博客主要根据这篇Survey论文进行总结，单也添加了很多论文中没有的内容，比如对Survey中列举的具体工作，进行了更加深入的说明和讨论，还有一些Survey中没有涉及到的工作，也在本博客中有讨论，同时，本文也没有涵盖Survey中列举的所有工作。
 
 
 
@@ -173,6 +173,10 @@ PPLM不希望去训练PLM，而是通过额外的一个attribute model来对PLM�
 ![MEGATRON-CNTRL](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/202204042343004.png)
 
 还有工作比如**PAIR**[14]则是先生成一个包含关键词和位置信息的模板，然后对模板进行填空，从而进行控制性生成；**GeDi**[15]则是训练一个小型的discriminator来引导PLM的生成。
+
+
+
+
 
 
 
