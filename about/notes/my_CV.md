@@ -1,129 +1,62 @@
 ---
-title:  郭必扬的简历（MSRA）
+title:  About 郭必扬
 published: 2022-01-11
 sidebar: auto
 ---
 
-# 郭必扬
+# 郭必扬 Biyang Guo
 
-- <small>Tel: 185-7275-6723</small>
-- <small>E-Mail: guo_biyang(@)163(dot)com</small>
+- E-Mail: guo_biyang(@)163(dot)com
+- [Github ](https://github.com/beyondguo) | [Google Scholar](https://scholar.google.co.uk/citations?hl=zh-CN&pli=1&user=B7l02PQAAAAJ) | [知乎](https://www.zhihu.com/people/guo-bi-yang-78/posts) | [SimpleAI公众号](https://mp.weixin.qq.com/s/v35g-p7wK2MkuM-SqjkF3g)
 
-> 目前是**上海财经大学信息管理与工程学院人工智能实验室**（SUFE AI Lab）在读二年级博士生。本科硕士均就读于上海财经大学信息管理与工程学院。
+我目前是[上海财经大学信息管理与工程学院](https://sime.sufe.edu.cn/main.htm) AI Lab 三年级博士生（2020~2024），师从[黄海量](https://sime.sufe.edu.cn/5b/79/c10574a154489/page.htm)教授。硕士、本科均就读于上海财经大学信管学院。博士期间主要研究NLP中的数据增强、以数据为中心的 AI、更鲁棒的文本分类等。相关成果发表于 AAAI 会议，并有多篇工作在审稿中。
 
+曾在[微软亚洲研究院（MSRA）](https://www.msra.cn/) NLC 组进行 9 个月（2022.3~2022.11）的研究实习，由[宫叶云](https://www.microsoft.com/en-us/research/people/yegong/)研究员指导。实习期间提出 [GENIUS 模型](https://arxiv.org/abs/2211.10330)，一个强大的基于草稿的文本生成预训练模型，可用于多种NLP任务的数据增强。
 
-- <small> <bold>微信公众号</bold>：SimpleAI</small>
-- <small><bold>个人博客</bold>：<a>https://beyondguo.github.io/</a></small>
-- <small><bold>知乎文章</bold>：<a>https://www.zhihu.com/people/guo-bi-yang-78/posts</a></small>
-
-
-## 研究兴趣：
-
-- NLP中的数据增强（Data Augmentation in NLP）
-- 数据为中心的人工智能（Data-centric AI）
-- 文本分类与标签表示（Text Classification & Label Embedding）
+作为 [SimpleAI 社区](https://huggingface.co/Hello-SimpleAI)的创始人，在 ChatGPT 推出 10 天之后就组建了一个博士生、工程师团队，开展一项名为 [ChatGPT 对比与检测](https://github.com/Hello-SimpleAI/chatgpt-comparison-detection)项目，推出首个开源的[人类-ChatGPT问答对比语料集（HC3）](https://huggingface.co/datasets/Hello-SimpleAI/HC3)和首个中英双语 [ChatGPT 内容检测器](https://huggingface.co/spaces/Hello-SimpleAI/chatgpt-detector-qa)，推出一个月累计访问量超过 2 万次。
 
 
 
-## 已有科研工作：
+## 科研工作/项目经历
 
-<style>
-table th:first-of-type {
-    width: 5%;
-}
-table th:nth-of-type(2) {
-    width: 95%;
-}
-</style>
+#### ChatGPT 对比与检测 (preprint) ![](https://img.shields.io/github/stars/Hello-SimpleAI/chatgpt-comparison-detection?style=social)
 
-| Year |Publications |
-| ---- |----  |
-|2021|[**Roles of Words: What Should (n’t) Be Augmented in Text Augmentation on Text Classification Tasks?** (Under Review)](https://openreview.net/pdf?id=_jpxhquKzO9) <p><small>{**Biyang Guo**, Songqiao Han, Hailiang Huang}</small></p>**简介**：传统的文本增强技术很少考虑词的角色对增强的不同影响，本文创造性地从**统计相关度**和**语义相似度**对词语进行了四种角色划分，并基于此提出**针对性文本增强技术**（STA），在9个数据集上验证比传统方法显著有效。<br /><br /><center><img src='https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220109164804.png' width=70%/></center>|
-|2020 |[**Label Confusion Learning to Enhance Text Classification Models** (AAAI-2021)](https://arxiv.org/abs/2012.04987) <p><small>{**Biyang Guo**, Songqiao Han, Xiao Han, Hailiang Huang, Ting Lu}</small></p>**简介**：本文提出了**标签混淆模型**（LCM）用来学习标签之间的overlap，从而动态地生成**模拟标签概率分布**来作为分类模型的target。在文本分类和图像分类的实验上都表明，LCM可以取得比one-hot label、smoothed label更好的效果。<br /><br /><center><img src='https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220109164546.png' width=70% align='center'/></center>|
+- 论文： **[How Close is ChatGPT to Human Experts? Comparison Corpus, Evaluation, and Detection](https://arxiv.org/abs/2301.07597)** (*Biyang Guo*, Xin Zhang, Ziyuan Wang, Minqi Jiang, Jinran Nie, Yuxuan Ding, Jianwei Yue, Yupeng Wu)
+- 角色：项目发起人、负责人 | SimpleAI 社区，SUFE AI Lab
+- <small>简介：ChatGPT的推出引起了学术界、业界的巨大轰动，ChatGPT生成的内容开始充斥各大UGC平台，并开始被用于作假、作弊，对互联网、教育等等行业产生了巨大威胁。基于此，我发起 ChatGPT 对比与检测项目，组建由8位国内外高校、企业的博士生、工程师，共同收集人类-ChatGPT对比数据，进行丰富的统计、语言学等分析，并基于深度学习、机器学习等技术，开发了一系列ChatGPT 内容检测器。据我们了解，**我们是学术、产业界最早开源对比数据集、检测器模型的团队**，目前检测器demo全球访问量已突破**2万**，用户覆盖5大洲，开源模型**月均下载量超过3K**，数据集月均下载量超过1K，Github **Stars 超过 512**，受到广大用户的认可和产业界的关注。相关论文预印版已发布于Arxiv平台。</small>
+
+#### GENIUS – 基于草稿的文本生成模型 (preprint)  ![](https://img.shields.io/github/stars/beyondguo/genius?style=social)
+
+- 论文：**[GENIUS: Sketch-based Language Model Pre-training via Extreme and Selective Masking for Text Generation and Augmentation](https://arxiv.org/abs/2211.10330)** (*Biyang Guo*, Yeyun Gong, Yelong Shen, Songqiao Han, Hailiang Huang, Nan Duan, Weizhu Chen)
+- 角色：第一作者 | SUFE AI Lab，MSRA
+- <small>简介：GENIUS 我在MSRA访问实习期间做的工作。是一个**基于草稿的生成式语言模型**（sketch-based generative language model），在超过2700万语料上进行大规模预训练，从而可以**基于少量的关键词、短语等信息生成内容丰富的文本段落**。GENIUS可用于**写作辅助、残缺信息填补，更是一个开箱即用的通用的 NLP 数据增强工具**，我们在分类、实体抽取、机器阅读等任务上验证了GENIUS作为数据增强工具的有效性。相关模型开源在Huggingface平台，模型**月均下载量超过 500 次**。</small>
+
+#### STA – 针对性文本增强技术 (preprint)  ![](https://img.shields.io/github/stars/beyondguo/STA?style=social)
+
+- 论文：**[Selective Text Augmentation with Word Roles for Low-Resource Text Classification](https://arxiv.org/abs/2209.01560)** (*Biyang Guo*, Songqiao Han, Hailiang Huang)
+- 角色：第一作者 | SUFE AI Lab
+- <small>简介：STA 是对传统NLP数据增强技术的一个改进，使用语义相似度和统计相关度对一个词的角色进行区分，然后针对性地进行数据增强。使用了STA方法的改进，**传统的基于规则的方法可以媲美甚至超越基于大型语言模型**（BERT、BART、GPT-2）的方法，且计算成本显著更低。</small>
+
+#### LCM – 标签混淆学习，更鲁棒的文本分类 (AAAI-21)  ![](https://img.shields.io/github/stars/beyondguo/label_confusion_learning?style=social)
+
+- 论文：**[Label Confusion Learning to Enhance Text Classification Models](https://ojs.aaai.org/index.php/AAAI/article/view/17529)** (*Biyang Guo*, Songqiao Han, Xiao Han, Hailiang Huang, Ting Lu)
+- 角色：第一作者 | SUFE AI Lab
+- <small>简介：我们提出在经典深度学习分类器的基础上添加一个LCM 插件，LCM 可以**在模型训练的过程中学习不同标签之间的重叠、相似关系，从而模拟一个比 one-hot 分布更加合理的标签分布**，使用这个改进后的标签分布来指导模型训练可以使模型在数据有噪音、标签易混淆的场景下获得显著性能提升。</small>
+
 
 
 ## 科研之外
 
 我是一名技术科普爱好者，<u>**喜欢并追求将艰深复杂的理论知识用通俗易懂的语言描绘出来**</u>。在科研之外的时间，我喜欢撰写技术博客，进行模型、论文解读。代表作品如下：
 
-- <small><a href='https://zhuanlan.zhihu.com/p/147310766'>整理了12小时，只为让你20分钟搞懂Seq2seq「知乎670+赞」</a></small>
-- <small><a href='https://zhuanlan.zhihu.com/p/42559190'>从此明白了卷积神经网络（CNN）「知乎1860+赞」</a></small>
-- <small><a href='https://zhuanlan.zhihu.com/p/71200936'>何时能懂你的心——图卷积神经网络（GCN）「知乎2700+赞」</a></small>
-- <small><a href='https://zhuanlan.zhihu.com/p/74242097'>GraphSAGE：我寻思GCN也没我牛逼「知乎1360+赞」</a></small>
+- <small><a href='https://zhuanlan.zhihu.com/p/147310766'>整理了12小时，只为让你20分钟搞懂Seq2seq「知乎900+赞」</a></small>
+- <small><a href='https://zhuanlan.zhihu.com/p/42559190'>从此明白了卷积神经网络（CNN）「知乎2600+赞」</a></small>
+- <small><a href='https://zhuanlan.zhihu.com/p/71200936'>何时能懂你的心——图卷积神经网络（GCN）「知乎3500+赞」</a></small>
+- <small><a href='https://zhuanlan.zhihu.com/p/74242097'>GraphSAGE：我寻思GCN也没我牛逼「知乎1600+赞」</a></small>
 
 
-包含上述作品在内，我在知乎上的专栏[DeepLearning学习笔记](https://www.zhihu.com/column/deeplearningnotes)和[NLP学习笔记](https://www.zhihu.com/column/pythontricks)累计被收藏**2.5W次**，获得众多深度学习和自然语言处理领域同学的认可。
-
-
-
-
-
----
-
-## ★ 未来工作畅想：
-
-### 1. **特征空间数据增强**
-
-**➤背景：**
-
-在原始数据上进行数据增强，我们需要根据数据本身的特点来设计各种增强方法，这样有两个问题：① 增强方法不通用，比如CV中的旋转、裁剪，就没法用到NLP中 ；②增强样本容易发现巨大含义改变，尤其针对NLP这种离散数据形式。
-
-有研究表明，在特征空间进行增强，相比于原始数据空间，更有可能得到真实的样本。同时，对特征的操作对于所有模态的特征都是通用的。因此，特征空间增强具有非常大的潜力和想象空间。
-
-**➤现有研究的问题：**
-
-特征空间数据增强的现有做法主要包括interpolation，extrapolation，noising。现有的工作存在以下问题：
-
-- 没有统一的task进行对比
-- 多数工作缺乏开源代码
-- 如果使用全局信息，就难以对特征进行fine tune，而如果想进行fine tune，就只能只用一个batch内的特征。（这导致现在多数的工作，都只能针对静态的特征进行增强，然后对增强后的特征进行下游任务）
-
-以上问题，使得特征空间增强的研究受到很大限制，没有成为数据增强的主流方法。目前特征空间增强最具代表性的还是mixup，但这只是interpolation的一种方法。
-
-**➤未来工作设想：**
-
-① 可以对现有的工作进行梳理，最好能够把它们整理到一个统一的框架中，并进行开源实现，使得特征增强可以作为一个方便易用的算子。这样，可以写一个综述。
-
-②能否把现有的静态特征增强，有效地迁移到fine tune的训练框架中？取得比mixup系列更好的效果？
-
-②相比于原始数据空间的增强，特征增强的方法目前还比较少。因此有很大的潜力可以设计新的特征增强方法/对现有工作进行改进。
+包含上述作品在内，我在知乎上的专栏[DeepLearning学习笔记](https://www.zhihu.com/column/deeplearningnotes)和[NLP学习笔记](https://www.zhihu.com/column/pythontricks)累计被收藏**3.5W次**，获得众多深度学习和自然语言处理领域同学的认可。
 
 
 
-### 2. **Data-centric NLP**
 
-**➤背景：**
-
-长期以来，AI的发展都是以模型为中心的，即如何设计出更好的模型、损失函数、正则化手段等等来提高模型在下游任务的表现。然而，随着大规模预训练模型的提出，我们能够在模型层面进行的创新和改进已经越来越少。
-
-近两年，Data-centric AI的概念被提出并受到越来越多人的注意。通过对模型输入的数据——深度学习的原料——的改善，我们可以让模型学得更好、更多、更可信，同时降低训练成本。
-
-**➤未来工作设想：**
-
-目前的Data-centric AI的主要方法包括：
-
-- 数据增强
-- 数据治理（例如，错误数据纠正/过滤）
-- 标签辅助的数据集改善
-
-我认为，Data-centric AI的基本假设是：“模型学习到的，都是来自我们提供的数据。然而我们提供的数据则不一定好。” 
-
-我曾在针对性文本增强的工作中思考过这个问题：（下图来自针对性文本增强的[preprint](https://arxiv.org/abs/2109.00175)）
-
-![Biyang Guo, 2021, https://arxiv.org/abs/2109.00175](https://gitee.com/beyond_guo/typora_pics/raw/master/typora/20220111161949.png)
-
-如上图所示意，模型学习到的实际上是由数据集所提供的特征，这往往跟我们下游任务中真实的特征有一定的gap，而data-centric AI能做的事情可以从如下两方面着手：
-
-**① 增大数据集特征，与真实任务特征的overlap；**
-
-**② 减少数据集中带来的bias、noise。**
-
-
-
-回顾现有的工作，则可以发现现有工作的一些**问题**：
-
-- 数据增强，只是增大了原数据集的覆盖面，因此在增大overlap的同时，也带来了更多的bias、noise，因此效果有限；
-- 错误数据过滤，只是单纯的降低原数据集的noise，所以效果很有限；
-- 标签辅助数据集改善，目前常用的是利用标签来生成一些新样本，所以只是稍微增大了上图中的一些overlap，并没有降低bias、noise，因此效果也有限。
-
-因此，未来工作，可以基于上面这些问题来开展。

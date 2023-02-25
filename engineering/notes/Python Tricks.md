@@ -139,7 +139,22 @@ df = df[df.content != '']
 
 
 
+`.iloc`的用法：https://www.cnblogs.com/nxf-rabbit75/p/10105271.html
 
+挑选指定行：
+
+```
+df.iloc[i,:]
+df.iloc[[1,2,3],:]
+```
+
+
+
+### 重置索引
+
+df = df.reset_index()
+
+df = df.reset_index(drop=True)
 
 ## `random`库
 
@@ -189,4 +204,14 @@ s_new = s.translate(table)
 ```
 
 就不用写一堆`replace`了。
+
+
+
+
+
+## 创建一个空的对象，可以赋属性
+
+```
+t = type('test', (object,), {})()
+```
 

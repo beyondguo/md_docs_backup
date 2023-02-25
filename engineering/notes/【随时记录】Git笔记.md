@@ -148,6 +148,18 @@ sudo apt-get install git-lfs
 
 ---
 
+
+
+## git撤回add/commit操作
+
+使用命令 git reset HEAD 
+
+这个是整体回到上次一次操作
+
+跑：git reset --soft HEAD^
+
+
+
 # 常见错误
 
 

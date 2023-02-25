@@ -98,8 +98,11 @@ https://blog.csdn.net/ztf312/article/details/83025297
 这个时候，对应目录会生成一个`nohup.out`的文件，可以在里面看到后台程序运行时的一些日志。
 
 
-### 打包文件夹
-zip -r 打包后的名字 要打包的文件/文件夹
+### 压缩/解压
+- zip打包文件夹：zip -r 打包后的名字 要打包的文件/文件夹
+- 解压.gz文件：(https://linuxize.com/post/how-to-unzip-gz-file/)
+  `gzip -d file.gz` (The command will restore the compressed file to its original state and remove the `.gz` file.)
+  `gzip -dk file.gz` (To keep the compressed file pass the `-k` option to the command:)
 
 ### 生成项目的python依赖
 pip install pipreqs
@@ -128,13 +131,17 @@ sudo apt-get install screen
 
 退出当前screen（程序继续运行）：按Ctrl+a+d三个键
 
-关闭某个screen，进入之后，输入exit即可
+有时候忘记在哪里开了某个screen，导致直接 screen -r无法进入，可以使用 `screen -d name/id`来先把那个screen退出，就可以进去，放心这不会kill那个screen
+
+关闭（kill）某个screen：进入之后，输入exit即可
 
 重新进入某个screen：`screen -r screen_name/screen_id`
 
 更多的一些例子参见：https://www.cnblogs.com/mchina/archive/2013/01/30/2880680.html
 
+**这个挺好**：https://www.liquidweb.com/kb/how-to-use-the-screen-command-in-linux/
 
+在screen模式下进行**上下滚动**：先同时按CTRL+A键，然后再按esc，就可以滚动了。要退出滚动，就再esc一下。
 
 ### ps 和 kill
 
@@ -210,9 +217,7 @@ If Keys need to be read-writable by you:
 chmod 600 ~/.ssh/id_rsa
 ```
 
-
-
-
+最高权限: `chmod 777`
 
 ### jupyter
 
@@ -241,6 +246,8 @@ To append a new path, we reassign PATH with the **new path at the end**:
 ```bash
 export PATH=$PATH:/some/new/path
 ```
+
+export PATH=$PATH:/home/v-biyangguo/.local/bin
 
 ## 查看python位置
 
