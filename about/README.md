@@ -7,7 +7,7 @@ sidebar: auto
 # 郭必扬 Biyang Guo
 
 - E-Mail: guo_biyang(@)163(dot)com
-- [中文简历](https://github.com/beyondguo/md_docs_backup/raw/master/about/files/BiyangGuo-cv-zh-2023.pdf) | [English CV](https://github.com/beyondguo/md_docs_backup/raw/master/about/files/BiyangGuo-cv-zh-2023.pdf)
+- [中文简历](https://github.com/beyondguo/md_docs_backup/raw/master/about/files/BiyangGuo-cv-zh-2023.pdf) | [English CV](https://github.com/beyondguo/md_docs_backup/raw/master/about/files/BiyangGuo-cv-en-2023.pdf)
 - [Github ](https://github.com/beyondguo) | [Google Scholar](https://scholar.google.co.uk/citations?hl=zh-CN&pli=1&user=B7l02PQAAAAJ) | [知乎](https://www.zhihu.com/people/guo-bi-yang-78/posts) | [SimpleAI公众号](https://mp.weixin.qq.com/s/v35g-p7wK2MkuM-SqjkF3g)
 
 我目前是[上海财经大学信息管理与工程学院](https://sime.sufe.edu.cn/main.htm) AI Lab 三年级博士生（2020~2024），师从[黄海量](https://sime.sufe.edu.cn/5b/79/c10574a154489/page.htm)教授，[韩松桥](https://sime.sufe.edu.cn/5b/89/c10575a154505/page.htm)副教授。硕士、本科均就读于上海财经大学信管学院。博士期间主要研究NLP中的数据增强、以数据为中心的 AI、更鲁棒的文本分类等。相关成果发表于 AAAI 会议，并有多篇工作在审稿中。
